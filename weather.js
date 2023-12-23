@@ -3,6 +3,9 @@
 import { getArgs } from "./helpers/args.js"
 import { printHelp, printError, printSuccess } from "./services/log.service.js"
 import { saveKeyValue } from "./services/storage.sevice.js"
+import { CLI_KEYS_DICTIONARY } from "./src/key_dictionary.js"
+
+
 
 async function saveToken (token) {
     if(!token.length){
@@ -10,7 +13,7 @@ async function saveToken (token) {
         return
     }
     try {
-        await saveKeyValue("token", token);
+        await saveKeyValue(CLI_KEYS_DICTIONARY.token, token);
 		printSuccess('Токен сохранён');
     } catch (error) {
         printError(error.message);
