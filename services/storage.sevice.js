@@ -23,9 +23,19 @@ const saveKeyValue = async (key, value) => {
     }
 }
 
+const getKeyValue = async (key) => {
+    if(existsSync(filePath)){
+        const file = await readFile(filePath);
+        data = JSON.parse(file);
+        return data[key]
+    } else {
+        return undefined
+    }
+}
+
 const createFile = async (pathDir, filePath, data) => {
     await mkdir(pathDir, { recursive: true });
     await writeFile(filePath, JSON.stringify(data));
 }
 
-export {saveKeyValue}
+export {saveKeyValue, getKeyValue}

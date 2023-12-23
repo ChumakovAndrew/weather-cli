@@ -5,6 +5,10 @@ import { printHelp, printError, printSuccess } from "./services/log.service.js"
 import { saveKeyValue } from "./services/storage.sevice.js"
 
 async function saveToken (token) {
+    if(!token.length){
+        printError("не передан токен")
+        return
+    }
     try {
         await saveKeyValue("token", token);
 		printSuccess('Токен сохранён');
