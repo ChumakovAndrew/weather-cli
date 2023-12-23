@@ -3,6 +3,7 @@
 import { getArgs } from "./helpers/args.js"
 import { printHelp, printError, printSuccess } from "./services/log.service.js"
 import { saveKeyValue } from "./services/storage.sevice.js"
+import { getWeather } from "./services/api.service.js"
 import { CLI_KEYS_DICTIONARY } from "./src/key_dictionary.js"
 
 
@@ -23,7 +24,7 @@ async function saveToken (token) {
 function initCli () {
     const args = getArgs(process.argv)
     if(Object.keys(args).length == 0){
-        console.log("Вы не ввели никаких аргументов.")
+        getWeather('Kiev')
         return null
     }
 

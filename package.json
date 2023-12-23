@@ -26,6 +26,7 @@
     "email": "andrew.chumakov12@gmail.com"
   },
   "dependencies": {
+    "axios": "^1.6.2",
     "chalk": "^5.3.0",
     "dedent": "^1.5.1"
   }

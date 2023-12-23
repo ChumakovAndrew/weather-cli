@@ -26,7 +26,7 @@ const saveKeyValue = async (key, value) => {
 const getKeyValue = async (key) => {
     if(existsSync(filePath)){
         const file = await readFile(filePath);
-        data = JSON.parse(file);
+        const data = JSON.parse(file);
         return data[key]
     } else {
         return undefined
