@@ -24,5 +24,9 @@
   },
   "bugs": {
     "email": "andrew.chumakov12@gmail.com"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "dedent": "^1.5.1"
   }
 }
