@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 import axios from 'axios';
+import dedent from "dedent";
 import PromptSync from 'prompt-sync';
+
 import { getArgs } from "./helpers/args.js"
 import { printHelp, printError, printSuccess, printWeather } from "./services/log.service.js"
 import { saveKeyValue, getKeyValue } from "./services/storage.sevice.js"
-import { getWeather } from "./services/api.service.js"
+import { getWeather, getIcon } from "./services/api.service.js"
 import { CLI_KEYS_DICTIONARY } from "./src/key_dictionary.js"
 
 const prompt = PromptSync()
@@ -54,10 +56,14 @@ const getForcast = async () => {
 		const city = await getKeyValue(CLI_KEYS_DICTIONARY.city);
 
         if(!city){
-            printError(`Не задан город`);
-            const answer = prompt('задать автоматически - "y", если хотите задать вручную - "n".');
-            if(answer === "y"){
-                return autoSetCity()
+            printError(dedent`
+                    Город не задан, вы можете:
+                    задать автоматически - "y",
+                    задать вручную - "n"`
+            );
+            const answer = prompt('>> ')
+            if(answer === "y") {
+                return autoSetCity();
             }else {
                 console.log("Задайте город при помощи команды -c [city]")
                 return
