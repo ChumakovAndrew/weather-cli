@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import dedent from "dedent";
+import moment from 'moment';
 
 const {bgRed, bgGreen, bgCyan, bgYellow} = chalk;
 
@@ -23,12 +24,17 @@ const printHelp = () => {
 };
 
 const printWeather = (res, icon) => {
+	const sunrise = moment.unix(res.sys.sunrise)
+	const sunset = moment.unix(res.sys.sunset)
+	
 	console.log(
 		dedent`${bgYellow(' WEATHER ')} Погода в городе ${res.name}
-		${icon}  ${res.weather[0].description}
+		${icon} ${res.weather[0].description}
 		Температура: ${res.main.temp} (ощущается как ${res.main.feels_like})
 		Влажность: ${res.main.humidity}%
 		Скорость ветра: ${res.wind.speed}
+		Восход солнца: ${sunrise.format("HH:mm")}
+		Закат солнца: ${sunset.format('HH:mm')}
 		`
 	);
 };
