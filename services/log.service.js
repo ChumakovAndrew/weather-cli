@@ -1,11 +1,11 @@
 import chalk from 'chalk';
 import dedent from "dedent";
 
-const {bgRed, bgGreen, bgCyan} = chalk
+const {bgRed, bgGreen, bgCyan, bgYellow} = chalk;
 
 const printError = (error) => {
-    console.log(bgRed('Error') + " " + error)
-}
+    console.log(bgRed('Error') + " " + error);
+};
 
 const printSuccess = (message) => {
 	console.log(bgGreen(' SUCCESS ') + ' ' + message);
@@ -22,4 +22,15 @@ const printHelp = () => {
 	);
 };
 
-export {printError, printHelp, printSuccess}
+const printWeather = (res, icon) => {
+	console.log(
+		dedent`${bgYellow(' WEATHER ')} Погода в городе ${res.name}
+		${icon}  ${res.weather[0].description}
+		Температура: ${res.main.temp} (ощущается как ${res.main.feels_like})
+		Влажность: ${res.main.humidity}%
+		Скорость ветра: ${res.wind.speed}
+		`
+	);
+};
+
+export {printError, printHelp, printSuccess, printWeather}
